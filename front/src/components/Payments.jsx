@@ -53,18 +53,21 @@ export const Payments = () => {
   ]);
 
   const formatCurrency = (amount) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
 
   const getStatusColor = (status) => {
     const colors = {
-      completed: "bg-green-500",
+      completed: "bg-blue-500",
       pending: "bg-yellow-500",
       failed: "bg-red-500",
-      active: "bg-green-500",
-      cancelled: "bg-gray-500",
+      active: "bg-blue-500",
+      cancelled: "bg-gray-400",
       expired: "bg-red-400",
     };
-    return colors[status] || "bg-gray-500";
+    return colors[status] || "bg-gray-400";
   };
 
   const totalSpent = payments
@@ -74,31 +77,45 @@ export const Payments = () => {
   const activeSubscriptions = subscriptions.filter((s) => s.status === "active");
 
   return (
-    <div className="p-6 md:p-8">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">Payments & Enrollments</h2>
+    <div className="p-6 md:p-8 max-w-6xl mx-auto bg-white min-h-screen rounded-2xl shadow-sm">
+      <h2 className="text-2xl font-semibold mb-8 text-gray-800">
+        Payments & Enrollments
+      </h2>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        <div className="p-5 bg-green-50 border border-green-400 rounded-2xl shadow-sm">
-          <h3 className="text-sm text-green-700 font-medium mb-2">Total Spent</h3>
-          <p className="text-3xl font-bold text-green-800">{formatCurrency(totalSpent)}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+        <div className="p-5 bg-blue-50 border border-blue-300 rounded-2xl shadow-sm hover:shadow-md transition-all">
+          <h3 className="text-sm text-blue-700 font-medium mb-2">
+            Total Spent
+          </h3>
+          <p className="text-3xl font-bold text-blue-800">
+            {formatCurrency(totalSpent)}
+          </p>
         </div>
 
-        <div className="p-5 bg-blue-50 border border-blue-400 rounded-2xl shadow-sm">
-          <h3 className="text-sm text-blue-700 font-medium mb-2">Active Subscriptions</h3>
-          <p className="text-3xl font-bold text-blue-800">{activeSubscriptions.length}</p>
+        <div className="p-5 bg-indigo-50 border border-indigo-300 rounded-2xl shadow-sm hover:shadow-md transition-all">
+          <h3 className="text-sm text-indigo-700 font-medium mb-2">
+            Active Subscriptions
+          </h3>
+          <p className="text-3xl font-bold text-indigo-800">
+            {activeSubscriptions.length}
+          </p>
         </div>
 
-        <div className="p-5 bg-yellow-50 border border-yellow-400 rounded-2xl shadow-sm">
-          <h3 className="text-sm text-yellow-700 font-medium mb-2">Total Transactions</h3>
-          <p className="text-3xl font-bold text-yellow-800">{payments.length}</p>
+        <div className="p-5 bg-sky-50 border border-sky-300 rounded-2xl shadow-sm hover:shadow-md transition-all">
+          <h3 className="text-sm text-sky-700 font-medium mb-2">
+            Total Transactions
+          </h3>
+          <p className="text-3xl font-bold text-sky-800">{payments.length}</p>
         </div>
       </div>
 
       {/* Subscriptions */}
       {subscriptions.length > 0 && (
         <section className="mb-10">
-          <h3 className="text-lg font-semibold mb-4 text-gray-800">Active Subscriptions</h3>
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">
+            Active Subscriptions
+          </h3>
           <div className="grid gap-4">
             {subscriptions.map((sub) => (
               <div
@@ -107,10 +124,14 @@ export const Payments = () => {
               >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-800">{sub.plan_name}</h4>
-                    <p className="text-2xl font-bold text-[#8BD02A]">
+                    <h4 className="text-lg font-semibold text-gray-800">
+                      {sub.plan_name}
+                    </h4>
+                    <p className="text-2xl font-bold text-[#3B82F6]">
                       {formatCurrency(sub.price)}
-                      <span className="text-sm text-gray-500 font-normal">/month</span>
+                      <span className="text-sm text-gray-500 font-normal">
+                        /month
+                      </span>
                     </p>
                   </div>
                   <span
@@ -134,17 +155,22 @@ export const Payments = () => {
 
       {/* Purchase History */}
       <section>
-        <h3 className="text-lg font-semibold mb-4 text-gray-800">Purchase History</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
+          Purchase History
+        </h3>
         {payments.length === 0 ? (
           <p className="text-gray-500">No purchase history available</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse bg-white rounded-2xl shadow-sm">
+          <div className="overflow-x-auto rounded-2xl shadow-sm">
+            <table className="w-full text-left border-collapse bg-white">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
                   {["Date", "Course", "Payment Method", "Amount", "Status", "Invoice"].map(
                     (heading) => (
-                      <th key={heading} className="px-4 py-3 text-sm font-semibold text-gray-700">
+                      <th
+                        key={heading}
+                        className="px-4 py-3 text-sm font-semibold text-gray-700"
+                      >
                         {heading}
                       </th>
                     )
@@ -153,7 +179,10 @@ export const Payments = () => {
               </thead>
               <tbody>
                 {payments.map((p) => (
-                  <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50 transition-all">
+                  <tr
+                    key={p.id}
+                    className="border-b border-gray-100 hover:bg-gray-50 transition-all"
+                  >
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {new Date(p.created_at).toLocaleDateString()}
                     </td>
@@ -179,7 +208,7 @@ export const Payments = () => {
                       {p.invoice_url ? (
                         <a
                           href={p.invoice_url}
-                          className="text-[#8BD02A] hover:underline text-sm font-medium"
+                          className="text-[#3B82F6] hover:underline text-sm font-medium"
                           target="_blank"
                           rel="noopener noreferrer"
                         >

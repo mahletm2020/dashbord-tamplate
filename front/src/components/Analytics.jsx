@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const Analytics = () => {
-  // Mock data for display only (you can replace with props or backend data later)
+  // Mock data
   const [enrollments] = useState([
     { id: 1, courseTitle: "React Fundamentals", progress: 75, enrolledAt: "2024-10-01", completedAt: null },
     { id: 2, courseTitle: "Advanced Tailwind", progress: 90, enrolledAt: "2024-09-12", completedAt: "2024-09-28" },
@@ -40,15 +40,15 @@ export const Analytics = () => {
           <p className="text-xs text-gray-600 mt-2">Across {enrollments.length} courses</p>
         </div>
 
-        <div className="p-5 bg-purple-50 border border-purple-300 rounded-xl">
-          <h3 className="text-sm text-purple-600 mb-2 font-medium">Average Quiz Score</h3>
-          <p className="text-3xl font-bold text-purple-700">{averageScore}%</p>
+        <div className="p-5 bg-sky-50 border border-sky-300 rounded-xl">
+          <h3 className="text-sm text-sky-600 mb-2 font-medium">Average Quiz Score</h3>
+          <p className="text-3xl font-bold text-sky-700">{averageScore}%</p>
           <p className="text-xs text-gray-600 mt-2">{quizAttempts.length} quizzes taken</p>
         </div>
 
-        <div className="p-5 bg-green-50 border border-green-300 rounded-xl">
-          <h3 className="text-sm text-green-600 mb-2 font-medium">Time Spent Learning</h3>
-          <p className="text-3xl font-bold text-green-700">{formatTime(totalTimeSpent)}</p>
+        <div className="p-5 bg-cyan-50 border border-cyan-300 rounded-xl">
+          <h3 className="text-sm text-cyan-600 mb-2 font-medium">Time Spent Learning</h3>
+          <p className="text-3xl font-bold text-cyan-700">{formatTime(totalTimeSpent)}</p>
           <p className="text-xs text-gray-600 mt-2">Total learning time</p>
         </div>
       </div>
@@ -114,7 +114,7 @@ export const Analytics = () => {
                       <span
                         className={`text-xs font-semibold px-3 py-1 rounded-full text-white ${
                           q.percentage >= 80
-                            ? "bg-green-500"
+                            ? "bg-blue-500"
                             : q.percentage >= 60
                             ? "bg-amber-500"
                             : "bg-red-500"

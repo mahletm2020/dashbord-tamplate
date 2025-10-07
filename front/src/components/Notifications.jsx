@@ -40,6 +40,7 @@ export const Notifications = () => {
   const [notifications, setNotifications] = useState(mockNotifications);
   const [filter, setFilter] = useState("all");
 
+  // --- Helpers ---
   const getFilteredNotifications = () => {
     if (filter === "all") return notifications;
     if (filter === "unread") return notifications.filter((n) => !n.read);
@@ -74,9 +75,9 @@ export const Notifications = () => {
       case "announcement":
         return "text-blue-500 bg-blue-50";
       case "deadline":
-        return "text-orange-500 bg-orange-50";
+        return "text-sky-500 bg-sky-50";
       case "feedback":
-        return "text-green-500 bg-green-50";
+        return "text-indigo-500 bg-indigo-50";
       default:
         return "text-gray-500 bg-gray-50";
     }
@@ -86,13 +87,13 @@ export const Notifications = () => {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="p-6 max-w-5xl mx-auto bg-white min-h-screen rounded-2xl shadow-sm">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-8">
         <h2 className="text-2xl font-semibold text-gray-800">
           Notifications{" "}
           {unreadCount > 0 && (
-            <span className="text-sm text-green-600 font-medium">
+            <span className="text-sm text-blue-600 font-medium">
               ({unreadCount} unread)
             </span>
           )}
@@ -100,7 +101,7 @@ export const Notifications = () => {
         {unreadCount > 0 && (
           <button
             onClick={markAllAsRead}
-            className="px-4 py-2 bg-[#8BD02A] text-white rounded-lg text-sm font-medium shadow hover:shadow-md transition-all"
+            className="px-4 py-2 bg-[#3B82F6] text-white rounded-lg text-sm font-medium shadow hover:shadow-md transition-all"
           >
             Mark All as Read
           </button>
@@ -116,7 +117,7 @@ export const Notifications = () => {
               onClick={() => setFilter(type)}
               className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all ${
                 filter === type
-                  ? "bg-[#8BD02A] text-white shadow"
+                  ? "bg-[#3B82F6] text-white shadow"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -128,7 +129,7 @@ export const Notifications = () => {
 
       {/* Notifications */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16 text-gray-500">
+        <div className="text-center py-20 text-gray-500">
           <p className="text-lg font-medium">No notifications</p>
           <p className="text-sm mt-2">You're all caught up 🎉</p>
         </div>
@@ -138,8 +139,10 @@ export const Notifications = () => {
             <div
               key={n.id}
               onClick={() => !n.read && markAsRead(n.id)}
-              className={`p-4 rounded-xl shadow-sm border transition-all cursor-pointer hover:shadow-md ${
-                n.read ? "bg-white border-gray-200" : "bg-gray-50 border-[#8BD02A]"
+              className={`p-5 rounded-xl border transition-all cursor-pointer hover:shadow-md ${
+                n.read
+                  ? "bg-white border-gray-200"
+                  : "bg-blue-50 border-[#3B82F6]"
               }`}
             >
               <div className="flex gap-4 items-start">
@@ -150,7 +153,7 @@ export const Notifications = () => {
                       {n.title}
                     </h3>
                     {!n.read && (
-                      <span className="w-2 h-2 bg-[#8BD02A] rounded-full mt-1.5"></span>
+                      <span className="w-2 h-2 bg-[#3B82F6] rounded-full mt-1.5"></span>
                     )}
                   </div>
                   <p className="text-sm text-gray-600 mb-3">{n.message}</p>
