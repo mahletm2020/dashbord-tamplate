@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import { CertificateDetail } from "../components/CertificateDetail"; // import the detail component
-import CertificateDetail from "../components/CertificateDetail";
+import CertificateDetail from "./CertificateDetail";
 
 
 export const CoreLearning = () => {

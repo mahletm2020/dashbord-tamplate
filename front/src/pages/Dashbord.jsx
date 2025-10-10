@@ -1,10 +1,10 @@
 // src/pages/Dashboard.jsx
 import { useState } from "react";
-import { CoreLearning } from "../components/CoreLearning";
-import { Analytics } from "../components/Analytics";
-import { Notifications } from "../components/Notifications";
-import { Payments } from "../components/Payments";
-import { Profile } from "../components/Profile";
+import { CoreLearning } from "../components/student/CoreLearning";
+import { Analytics } from "../components/student/Analytics";
+import { Notifications } from "../components/student/Notifications";
+import { Payments } from "../components/student/Payments";
+import { Profile } from "../components/student/Profile";
 
 export const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("learning");
